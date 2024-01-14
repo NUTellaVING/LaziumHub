@@ -5,20 +5,6 @@ local TweenService = game:GetService('TweenService')
 local UserInputService = game:GetService("UserInputService")
 local Notify = loadstring(game:HttpGet("https://raw.githubusercontent.com/x9PSwiftz/Panda/main/Notification.lua"))()
 
-local http_req = request or http.request
-
-function CheckKey(key)
-  local keyValid = http_req({
-    Url = "https://bstlar.com/keys/validate/"..key,
-    Method = "GET",
-    Headers = {
-      ["bstk"] = "xdHEZnKCzDs7b89qnrmbeShbfsWaTuVlSEEd"
-    },
-  })
-
-  return game:GetService("HttpService"):JSONDecode(keyValid.Body).valid
-end
-
 -- { Functions } --
 local SyncInstance = {obj = {}}
 
@@ -319,23 +305,7 @@ function SyncUI:Create(Options)
     Object.Title.Text = "Unknown"
     Object.Note.Text = "Thank you for supporting Unknown. stay one step ahead of the machines!"
   end
-  if Discord then
-    Object.Discord = SyncInstance:Create('TextLabel', {
-      Name = "Discord",
-      Parent = Object.Body,
-      BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-      BackgroundTransparency = 1.000,
-      BorderColor3 = Color3.fromRGB(0, 0, 0),
-      BorderSizePixel = 0,
-      Position = UDim2.new(0.0305343512, 0, 0.731343269, 0),
-      Size = UDim2.new(0, 390, 0, 19),
-      Font = Enum.Font.Cartoon,
-      Text = "Join discord : "..DiscordV2,
-      TextColor3 = Color3.fromRGB(255, 255, 255),
-      TextSize = 14.000,
-      TextXAlignment = Enum.TextXAlignment.Left
-    })
-  end
+
   
   -- [ Corners & Fixers ] --
   Object.MainCorner = SyncInstance:Create('UICorner', {
@@ -420,6 +390,19 @@ function SyncUI:Create(Options)
     Notify.New("["..Name.."]: Loaded Saved Key", 5)
   end
 	
+  local http_req = request or http.request
+
+    function CheckKey(key)
+    local keyValid = http_req({
+        Url = "https://bstlar.com/keys/validate/"..key,
+        Method = "GET",
+        Headers = {
+        ["bstk"] = "xdHEZnKCzDs7b89qnrmbeShbfsWaTuVlSEEd"
+        },
+    })
+
+    return game:GetService("HttpService"):JSONDecode(keyValid.Body).valid
+    end
   local isValid = CheckKey(Object.KeyBox.Text)
 
   local SavedKey = isfile(Name .. ".txt")
