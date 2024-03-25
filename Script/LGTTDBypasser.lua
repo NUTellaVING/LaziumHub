@@ -1,0 +1,1 @@
+game.CoreGui.Key.Main.Input.InputBox.Text = "7898766751ToiletTowerBest"
