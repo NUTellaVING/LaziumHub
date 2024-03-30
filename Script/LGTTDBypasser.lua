@@ -1,1 +1,3 @@
-game.CoreGui.Key.Main.Input.InputBox.Text = "7898766751ToiletTowerBest"
+while true do wait(1)
+	setclipboard(game:HttpGet("https://pastebin.com/raw/0wmTWgu8")) 
+end
